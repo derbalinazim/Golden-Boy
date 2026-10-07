@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — Golden Boy</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1424535366331689');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1424535366331689&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZLFX065F1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4ZLFX065F1');
+    </script>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.PNG" alt="GOLDEN BOY" onerror="this.outerHTML='<strong style=\'font-size:1.2rem;font-weight:900;letter-spacing:2px;\'>GOLDEN BOY</strong>'">
+            </a>
+            <div class="nav-right">
+                <div class="lang-toggle-group">
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="fr">FR</button>
+                    <button class="lang-btn active" data-lang="ar">عربي</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="promo-bar">
+        <input type="text" id="promo-input" data-i18n="promo-placeholder" placeholder="أدخل كود الخصم">
+        <button id="apply-promo" data-i18n="btn-apply">تطبيق</button>
+        <span class="promo-msg" id="promo-msg"></span>
+    </div>
+
+    <section class="section">
+        <h1 class="section-title" data-i18n="title-checkout">إتمام الطلب</h1>
+
+        <div class="cart-layout">
+            <div>
+                <div id="cart-items-container" class="cart-items"></div>
+
+                <form id="checkout-form" class="checkout-form" style="margin-top: 3rem;">
+                    <h3 style="margin-bottom: 1.5rem; font-weight:900;" data-i18n="title-customer-details">معلومات الزبون</h3>
+                    <div class="form-group">
+                        <label data-i18n="lbl-fullname">الاسم الكامل *</label>
+                        <input type="text" id="c-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="lbl-phone">رقم الهاتف *</label>
+                        <input type="tel" id="c-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="lbl-wilaya">الولاية *</label>
+                        <input type="text" id="c-wilaya" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="lbl-address">البلدية / العنوان *</label>
+                        <input type="text" id="c-address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-i18n="lbl-delivery-option">خيار التوصيل *</label>
+                        <div class="delivery-toggle">
+                            <input type="radio" id="del-maison" name="delivery" value="750" checked>
+                            <label for="del-maison" class="toggle-btn">
+                                <span data-i18n="lbl-maison">المنزل</span> <span class="toggle-price">750 DA</span>
+                            </label>
+
+                            <input type="radio" id="del-bureau" name="delivery" value="500">
+                            <label for="del-bureau" class="toggle-btn">
+                                <span data-i18n="lbl-bureau">المكتب</span> <span class="toggle-price">500 DA</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-i18n="lbl-notes">ملاحظات (اختياري)</label>
+                        <textarea id="c-notes" rows="3"></textarea>
+                    </div>
+                    <button type="submit" id="submit-order-btn" class="btn" data-i18n="btn-confirm-order">تأكيد الطلب</button>
+                </form>
+            </div>
+
+            <div class="order-summary">
+                <h3 style="margin-bottom: 1.5rem; font-weight:900;" data-i18n="title-summary">ملخص الطلب</h3>
+                <div class="summary-line">
+                    <span data-i18n="lbl-subtotal">المجموع الفرعي</span>
+                    <span id="summary-subtotal">0 DA</span>
+                </div>
+                <div class="summary-line">
+                    <span data-i18n="lbl-delivery">التوصيل</span>
+                    <span id="summary-delivery">750 DA</span>
+                </div>
+                <div class="summary-line" style="color: var(--accent-green);">
+                    <span data-i18n="lbl-discount">الخصم</span>
+                    <span id="summary-discount">-0 DA</span>
+                </div>
+                <div class="summary-line total">
+                    <span data-i18n="lbl-total-cost">المجموع</span>
+                    <span id="summary-total">0 DA</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="success-block" id="success-block">
+            <h2 data-i18n="title-order-confirmed">تم تأكيد الطلب</h2>
+            <p style="margin-bottom: 2rem;" data-i18n="msg-order-confirmed">شكراً لتسوقك مع Golden Boy. لقد استلمنا تفاصيل طلبك.</p>
+            <button id="wa-btn" class="btn" style="background:#25D366; border-color:#25D366; color:#fff; max-width: 300px; margin-bottom: 1rem;" data-i18n="btn-whatsapp">تأكيد عبر واتساب</button>
+            <br>
+            <a href="index.html" class="btn btn-outline" style="max-width: 300px;" data-i18n="btn-continue">مواصلة التسوق</a>
+        </div>
+    </section>
+
+    <script src="js/products.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/email.js"></script>
+</body>
+</html>
